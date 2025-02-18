@@ -1,0 +1,18 @@
+[submodule "external/EASTL"]
+	path = external/EASTL
+	url = https://github.com/electronicarts/EASTL.git
+[submodule "external/stb"]
+	path = external/stb
+	url = https://github.com/nothings/stb.git
+[submodule "external/spdlog"]
+	path = external/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "external/VulkanMemoryAllocator"]
+	path = external/VulkanMemoryAllocator
+	url = https://github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator.git
+[submodule "external/glfw"]
+	path = external/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "external/EABase"]
+	path = external/EABase
+	url = https://github.com/electronicarts/EABase.git
