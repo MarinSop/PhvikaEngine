@@ -2,19 +2,25 @@
 
 #include "../Phvika/Core.h"
 #include <GLFW/glfw3.h>
+#include "../Event/WindowResizeEvent.h"
+#include "../Event/EventHandler.h"
+#include <EASTL/unique_ptr.h>
+#include "../Phvika/Log.h"
 
-class PHV_API Window
-{
-public:
-	Window(const char* title, int width, int height);
-	~Window();
+namespace phv {
+
+	class PHV_API Window
+	{
+	public:
+		Window(const char* title, int width, int height);
+		~Window();
 
 
-	GLFWwindow* GetWindow() const { return m_window; }
+		GLFWwindow* GetWindow() const { return m_window; }
 
-private:
-	int m_width = 0;
-	int m_height = 0;
-	GLFWwindow* m_window = nullptr;
-};
-
+	private:
+		int m_width = 0;
+		int m_height = 0;
+		GLFWwindow* m_window = nullptr;
+	};
+}

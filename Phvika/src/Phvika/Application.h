@@ -19,7 +19,7 @@ namespace phv {
 
 
 	private:
-		eastl::unique_ptr<Window> m_window;
+		eastl::unique_ptr<phv::Window> m_window;
 	};
 
 	Application* CreateApplication();

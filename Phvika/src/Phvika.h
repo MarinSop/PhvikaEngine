@@ -8,5 +8,9 @@
 //window
 #include "Window/Window.h"
 
+//events
+#include "Event/EventManager.h"
+#include "Event/WindowResizeEvent.h"
+
 //Entry point
 #include "Phvika/EntryPoint.h"

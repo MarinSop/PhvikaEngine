@@ -1,18 +1,21 @@
 #include "Application.h"
+#include "../Event/WindowResizeEvent.h"
+#include "../Event/EventManager.h"
 
 namespace phv {
 
 	phv::Application::Application()
 	{
+		m_window.reset(new phv::Window("Application", 600, 800));
 	}
 
 	phv::Application::~Application()
 	{
+		g_eventManager.Shutdown();
 	}
 
 	void Application::init()
 	{
-		m_window.reset(new Window("Application", 600, 800));
 	}
 
 	void Application::loop()
@@ -20,6 +23,7 @@ namespace phv {
 		while (!glfwWindowShouldClose(m_window.get()->GetWindow()))
 		{
 			glfwPollEvents();
+			g_eventManager.DispatchEvents();
 		}
 	}
 

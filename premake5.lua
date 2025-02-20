@@ -66,6 +66,8 @@ project "Phvika"
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("obj/" .. outputdir .. "/%{prj.name}")
     
+    buildoptions { "/utf-8" }
+
     files
     {
         "%{prj.name}/src/**.h",
@@ -85,7 +87,8 @@ project "Phvika"
     
     links
     {
-        "GLFW" -- Link against the GLFW project
+        "GLFW",
+        "EASTL"
     }
     
     filter "system:windows"
@@ -123,6 +126,8 @@ project "Demo"
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("obj/" .. outputdir .. "/%{prj.name}")
+
+    buildoptions { "/utf-8" }
     
     files
     {
@@ -145,7 +150,8 @@ project "Demo"
     links
     {
         "Phvika",
-        "GLFW" -- Link against the GLFW project
+        "GLFW",
+        "EASTL"
     }
     
     filter "system:windows"
@@ -169,3 +175,37 @@ project "Demo"
     filter "configurations:Dist"
         defines "PHV_DIST"
         optimize "On"
+
+    project "EASTL"
+        kind "StaticLib"
+        language "C++"
+        
+        targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+        objdir ("obj/" .. outputdir .. "/%{prj.name}")
+        
+        files
+        {
+            "%{wks.location}/external/EASTL/source/**.cpp",
+            "%{wks.location}/external/EASTL/include/EASTL/**.h"
+        }
+        
+        includedirs
+        {
+            "%{wks.location}/external/EASTL/include",
+            "%{wks.location}/external/EABase/include/Common"
+        }
+        
+        filter "system:windows"
+            systemversion "latest"
+            cppdialect "C++17"
+            staticruntime "On"
+        
+        filter "configurations:Debug"
+            runtime "Debug"
+            symbols "on"
+        
+        filter "configurations:Release"
+            runtime "Release"
+            optimize "on"
+    
+
