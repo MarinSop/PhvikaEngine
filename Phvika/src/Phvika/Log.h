@@ -24,11 +24,13 @@ namespace phv {
 #define PHJV_CORE_TRACE(...) ::phv::Log::GetEngineLogger()->trace(__VA_ARGS__);
 #define PHV_CORE_INFO(...) ::phv::Log::GetEngineLogger()->info(__VA_ARGS__);
 #define PHV_CORE_WARN(...) ::phv::Log::GetEngineLogger()->warn(__VA_ARGS__);
+#define PHV_CORE_CRITICAL(...) ::phv::Log::GetEngineLogger()->critical(__VA_ARGS__);
 
 #define PHV_ERROR(...) ::phv::Log::GetClientLogger()->error(__VA_ARGS__);
 #define PHV_TRACE(...) ::phv::Log::GetClientLogger()->trace(__VA_ARGS__);
 #define PHV_INFO(...) ::phv::Log::GetClientLogger()->info(__VA_ARGS__);
 #define PHV_WARN(...) ::phv::Log::GetClientLogger()->warn(__VA_ARGS__);
+#define PHV_CRITICAL(...) ::phv::Log::GetClientLogger()->critical(__VA_ARGS__);
 
 }
 

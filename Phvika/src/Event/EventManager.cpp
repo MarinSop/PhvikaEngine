@@ -1,10 +1,11 @@
 #include "EventManager.h"
+#include "EASTL/utility.h"
 
 namespace phv {
 
 	EventManager g_eventManager;
 
-	void EventManager::Subscribe(EventType eventType, eastl::unique_ptr<IEventHandlerWrapper>&& handler)
+	void EventManager::Subscribe(EventType eventType, Unique<IEventHandlerWrapper>&& handler)
 	{
 		m_handlers[eventType].emplace_back(std::move(handler));
 	}
@@ -36,7 +37,7 @@ namespace phv {
 			}
 		}
 	}
-	void EventManager::QueueEvent(eastl::unique_ptr<Event>&& event)
+	void EventManager::QueueEvent(Unique<Event>&& event)
 	{
 		m_queuedEvents.emplace_back(std::move(event));
 	}
@@ -51,8 +52,8 @@ namespace phv {
 	}
 	void EventManager::Shutdown()
 	{
-		eastl::queue<eastl::unique_ptr<Event>> clear;
-		std::swap(m_queuedEvents, clear);
+		eastl::queue<Unique<Event>> clear;
+		eastl::swap(m_queuedEvents, clear);
 		m_handlers.clear();
 	}
 }

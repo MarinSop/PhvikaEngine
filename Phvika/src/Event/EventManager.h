@@ -1,23 +1,14 @@
 #pragma once
 
+#include "Phvika/Core.h"
 #include <EASTL/functional.h>
 #include <EASTL/queue.h>
-#include <EASTL/unique_ptr.h>
 #include <EASTL/unordered_map.h>
 #include <EASTL/vector.h>
 #include  <EASTL/string.h>
 #include "EventHandler.h"
 
 namespace phv {
-
-	//struct EnumClassHash
-	//{
-	//	template <typename T>
-	//	std::size_t operator()(T t) const
-	//	{
-	//		return static_cast<std::size_t>(t);
-	//	}
-	//};
 
 	class EventManager
 	{
@@ -26,24 +17,24 @@ namespace phv {
 		EventManager(const EventManager&) = delete;
 		const EventManager& operator=(const EventManager&) = delete;
 
-		void Subscribe(EventType eventType, eastl::unique_ptr<IEventHandlerWrapper>&& handler);
+		void Subscribe(EventType eventType, Unique<IEventHandlerWrapper>&& handler);
 		//TO FIX
 		//void Unsubscribe(eastl::unique_ptr<IEventHandlerWrapper> handler);
 		void TriggerEvent(Event& e);
-		void QueueEvent(eastl::unique_ptr<Event>&& event);
+		void QueueEvent(Unique<Event>&& event);
 		void DispatchEvents();
 		void Shutdown();
 
 
 	private:
-		eastl::queue<eastl::unique_ptr<Event>> m_queuedEvents;
-		eastl::unordered_map<EventType, eastl::vector<eastl::unique_ptr<IEventHandlerWrapper>>> m_handlers;
+		eastl::queue<Unique<Event>> m_queuedEvents;
+		eastl::unordered_map<EventType, eastl::vector<Unique<IEventHandlerWrapper>>> m_handlers;
 		
 	};
 
 	extern EventManager g_eventManager;
 
-	inline void Subscribe(eastl::unique_ptr<IEventHandlerWrapper> callback)
+	inline void Subscribe(Unique<IEventHandlerWrapper> callback)
 	{	
 		g_eventManager.Subscribe(callback->GetType(), std::move(callback));
 	}
@@ -55,9 +46,9 @@ namespace phv {
 		g_eventManager.TriggerEvent(e);
 	}
 
-	inline void QueueEvent(eastl::unique_ptr<Event>&& e)
+	inline void QueueEvent(Unique<Event>&& e)
 	{
-		g_eventManager.QueueEvent(std::forward<eastl::unique_ptr<Event>>(e));
+		g_eventManager.QueueEvent(std::forward<Unique<Event>>(e));
 	}
 
 	inline void Shutdown()

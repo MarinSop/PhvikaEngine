@@ -1,11 +1,7 @@
 #pragma once
 
-#include "../Phvika/Core.h"
+#include "Phvika/Core.h"
 #include <GLFW/glfw3.h>
-#include "../Event/WindowResizeEvent.h"
-#include "../Event/EventHandler.h"
-#include <EASTL/unique_ptr.h>
-#include "../Phvika/Log.h"
 
 namespace phv {
 

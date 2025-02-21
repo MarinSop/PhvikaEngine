@@ -2,7 +2,6 @@
 #include "Log.h"
 #include "Core.h"
 #include "../Window/Window.h"
-#include<EASTL/unique_ptr.h>
 
 namespace phv {
 
@@ -19,7 +18,7 @@ namespace phv {
 
 
 	private:
-		eastl::unique_ptr<phv::Window> m_window;
+		Unique<phv::Window> m_window;
 	};
 
 	Application* CreateApplication();

@@ -62,6 +62,7 @@ project "Phvika"
     location "Phvika"
     kind "SharedLib"
     language "C++"
+    cppdialect "C++20"
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("obj/" .. outputdir .. "/%{prj.name}")
@@ -76,30 +77,38 @@ project "Phvika"
 
     includedirs
     {
+        "%{prj.name}/src",
         "%{wks.location}/external/spdlog/include",
         "%{wks.location}/external/stb",
         "%{wks.location}/external/EASTL/include",
         "%{wks.location}/external/spdlog/include",
         "%{wks.location}/external/VulkanMemoryAllocator/include",
-        "%{GLFW_DIR}/include", -- GLFW headers
-        "%{wks.location}/external/EABase/include/Common"
+        "%{GLFW_DIR}/include",
+        "%{wks.location}/external/EABase/include/Common",
+        "$(VULKAN_SDK)/Include"
+    }
+
+    libdirs
+    { 
+        "$(VULKAN_SDK)/Lib" 
     }
     
     links
     {
         "GLFW",
-        "EASTL"
+        "EASTL",
+        "vulkan-1"
     }
     
     filter "system:windows"
-        cppdialect "C++20"
         staticruntime "On"
         systemversion "latest"
         
         defines
         {
             "PHV_PLATFORM_WINDOWS",
-            "PHV_BUILD_DLL"
+            "PHV_BUILD_DLL",
+            "PHV_ENABLE_ASSERT"
         }
         
         postbuildcommands
@@ -123,6 +132,7 @@ project "Demo"
     location "Demo"
     kind "ConsoleApp"
     language "C++"
+    cppdialect "C++20"
     
     targetdir ("bin/" .. outputdir .. "/%{prj.name}")
     objdir ("obj/" .. outputdir .. "/%{prj.name}")
@@ -143,25 +153,32 @@ project "Demo"
         "%{wks.location}/external/EASTL/include",
         "%{wks.location}/external/spdlog/include",
         "%{wks.location}/external/VulkanMemoryAllocator/include",
-        "%{GLFW_DIR}/include", -- GLFW headers
-        "%{wks.location}/external/EABase/include/Common"
+        "%{GLFW_DIR}/include",
+        "%{wks.location}/external/EABase/include/Common",
+        "$(VULKAN_SDK)/Include"
+    }
+
+    libdirs 
+    { 
+        "$(VULKAN_SDK)/Lib" 
     }
     
     links
     {
         "Phvika",
         "GLFW",
-        "EASTL"
+        "EASTL",
+        "vulkan-1"
     }
     
     filter "system:windows"
-        cppdialect "C++20"
         staticruntime "On"
         systemversion "latest"
         
         defines
         {
-            "PHV_PLATFORM_WINDOWS"
+            "PHV_PLATFORM_WINDOWS",
+            "PHV_ENABLE_ASSERT"
         }
         
     filter "configurations:Debug"
