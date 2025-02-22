@@ -10,10 +10,10 @@ namespace phv {
 		VulkanInstance();
 		~VulkanInstance();
 
-		VkInstance GetInstance();
+		const VkInstance GetInstance();
 
 	private:
-		VkInstance m_instance;
+		VkInstance m_instance = VK_NULL_HANDLE;
 	};
 
 }

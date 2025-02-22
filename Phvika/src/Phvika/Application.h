@@ -1,7 +1,7 @@
 #pragma once
+#include "Window/Window.h"
 #include "Log.h"
 #include "Core.h"
-#include "../Window/Window.h"
 
 namespace phv {
 
@@ -18,7 +18,7 @@ namespace phv {
 
 
 	private:
-		Unique<phv::Window> m_window;
+		Unique<Window> m_window;
 	};
 
 	Application* CreateApplication();

@@ -18,4 +18,9 @@ namespace phv {
 	{
 		"VK_LAYER_KHRONOS_validation"
 	};
+
+    const eastl::array<const char*> deviceExtensions =
+    {
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME
+    };
 }

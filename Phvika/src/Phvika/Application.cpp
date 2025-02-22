@@ -6,7 +6,7 @@ namespace phv {
 
 	phv::Application::Application()
 	{
-		m_window.reset(new phv::Window("Application", 600, 800));
+		m_window = MakeUnique<Window>("Application", 600, 800);
 	}
 
 	phv::Application::~Application()

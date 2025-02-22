@@ -1,7 +1,8 @@
 #pragma once
-
+#define GLFW_INCLUDE_VULKAN
 #include "Phvika/Core.h"
 #include <GLFW/glfw3.h>
+#include "Graphics/Vulkan/VulkanAPI.h"
 
 namespace phv {
 
@@ -17,6 +18,7 @@ namespace phv {
 	private:
 		int m_width = 0;
 		int m_height = 0;
+		Shared<VulkanAPI> m_vulkanAPI;
 		GLFWwindow* m_window = nullptr;
 	};
 }

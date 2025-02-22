@@ -39,6 +39,7 @@
 #include "Phvika/Log.h"
 #include <EASTL/unique_ptr.h>
 #include <EASTL/utility.h>
+#include <EASTL/memory.h>
 #include <EASTL/shared_ptr.h>
 
 namespace phv {
