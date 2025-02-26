@@ -1,4 +1,6 @@
 #include "VulkanDebug.h"
+#include <EASTL/vector.h>
+#include "Graphics/Vulkan/VulkanConstants.h"
 
 namespace phv {
 
@@ -27,7 +29,7 @@ namespace phv {
 		: m_instance(instance)
 	{
 		VkDebugUtilsMessengerCreateInfoEXT debugUtilsMessengerCreateInfo;
-		populateDebugUtilsMessengerCreateInfo(debugUtilsMessengerCreateInfo);
+		PopulateDebugUtilsMessengerCreateInfo(debugUtilsMessengerCreateInfo);
 		VkResult result = CreateDebugUtilsMessengerEXT(m_instance, &debugUtilsMessengerCreateInfo, nullptr, &m_debugUtilsMessenger);
 		PHV_CORE_ASSERT(result != VK_SUCCESS, "Failed to create debug utils messenger!");
 	}
@@ -42,7 +44,7 @@ namespace phv {
 		return m_debugUtilsMessenger;
 	}
 
-	void VulkanDebug::populateDebugUtilsMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& debugUtilsMessengerInfo)
+	void VulkanDebug::PopulateDebugUtilsMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& debugUtilsMessengerInfo)
 	{
 		debugUtilsMessengerInfo = {};
 		debugUtilsMessengerInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT;
@@ -71,6 +73,33 @@ namespace phv {
 		if (func != nullptr) {
 			func(instance, debugMessenger, pAllocator);
 		}
+	}
+
+	bool VulkanDebug::IsValidationLayerSupported()
+	{
+		uint32_t availableLayerCount = 0;
+		vkEnumerateInstanceLayerProperties(&availableLayerCount, nullptr);
+
+		eastl::vector<VkLayerProperties> availableLayers(availableLayerCount);
+		vkEnumerateInstanceLayerProperties(&availableLayerCount, availableLayers.data());
+
+		for (const char* layer : validationLayers)
+		{
+			bool layerFound = false;
+			for (const VkLayerProperties& layerProperty : availableLayers)
+			{
+				if (strcmp(layer, layerProperty.layerName) == 0)
+				{
+					layerFound = true;
+					break;
+				}
+			}
+			if (!layerFound)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

@@ -30,7 +30,7 @@ namespace phv {
 			instanceInfo.enabledLayerCount = static_cast<uint32_t>(phv::validationLayers.size());
 			instanceInfo.ppEnabledLayerNames = phv::validationLayers.data();
 			VkDebugUtilsMessengerCreateInfoEXT debugMessengerInfo;
-			VulkanDebug::populateDebugUtilsMessengerCreateInfo(debugMessengerInfo);
+			VulkanDebug::PopulateDebugUtilsMessengerCreateInfo(debugMessengerInfo);
 			instanceInfo.pNext = static_cast<VkDebugUtilsMessengerCreateInfoEXT*>(&debugMessengerInfo);
 		#else
 			instanceInfo.enableLayerCount = 0;

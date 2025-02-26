@@ -3,6 +3,10 @@
 #include "VulkanInstance.h"
 #include "VulkanDebug.h"
 #include "VulkanSurface.h"
+#include "VulkanPhysicalDevice.h"
+#include "VulkanLogicalDevice.h"
+
+#define GLFW_INCLUDE_VULKAN
 #include <glfw/glfw3.h>
 
 namespace phv {
@@ -18,6 +22,8 @@ namespace phv {
 		Unique<VulkanInstance> m_instance;
 		Unique<VulkanDebug> m_debug;
 		Unique<VulkanSurface> m_surface;
+		Unique<VulkanPhysicalDevice> m_physicalDevice;
+		Unique<VulkanLogicalDevice> m_logicalDevice;
 	};
 
 }
